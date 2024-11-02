@@ -11,7 +11,7 @@ def tweet_list(request):
     tweets = Tweet.objects.all().order_by('-created_at')
     return render(request, 'tweet_list.html', {'tweets': tweets})
 
-def create_tweet(request):
+def tweet_create(request):
     if request.method == 'POST':
         form = TweetForm(request.POST, request.FILES)
         if form.is_valid():
@@ -21,7 +21,7 @@ def create_tweet(request):
             return redirect('tweet_list')    
     else:
         form = TweetForm()
-    return render(request, 'create_tweet.html', {'form': form})            
+    return render(request, 'tweet_form.html', {'form': form})             
 
 
 def tweet_edit(request, tweet_id):
@@ -33,7 +33,7 @@ def tweet_edit(request, tweet_id):
             return redirect('tweet_list')
     else:
         form = TweetForm(instance=tweet)
-    return render(request, 'edit_tweet.html', {'form': form})
+    return render(request, 'tweet_form.html', {'form': form})
 
 
 def tweet_delete(request, tweet_id):
